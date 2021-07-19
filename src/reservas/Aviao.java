@@ -1,10 +1,24 @@
 package reservas;
 
-public class Aviao {
+public class Aviao extends Aeronave{
+	
+	public Passageiro lugares[][];
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello Reservas");
-		System.out.println("asdsadasdjasdasd");
+	public Aviao (String modelo, int fileira, int assento)
+	{
+		super(modelo);
+		this.fileira = fileira;
+		this.assento = assento;
+		lugares = new Passageiro[fileira][assento];
+	}
+	
+	public boolean verificarLugarOcupado(int fileira,int assento)
+	{
+	
+	}
+	
+	public void setPassageiro(int fileira,int assento, Passageiro)
+	{
+
 	}
 }
