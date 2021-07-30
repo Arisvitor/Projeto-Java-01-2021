@@ -1,27 +1,32 @@
 package reservas;
 
 public class Voo {
-	
-	private aeronave Aviao;
+	//aeronave do tipo Avião
+	private Aviao aeronave ;
 	
 	private int nro;
 	private String data;
 	private String hora;
 
-	public Voo (aeronave Aviao, int nro, String data, String hora);
-	
+	public Voo (Aviao aeronave, int nro, String data, String hora) {
+		this.aeronave = aeronave;
+		this.nro = nro;
+		this.data = data;
+		this.hora = hora;
+	}
+	//usa o get para pegar o nro da classe voo
 	public int getNro()
 	{
-		return nro;
+		return this.nro;
 	}
-	
+	//usa o get para pegar a data da classe voo
 	public String getData()
 	{
-		return data;
+		return this.data;
 	}
-	
+	//usa o get para pegar a hora da classe voo
 	public String getHora()
 	{
-		return hora;
+		return this.hora;
 	}
 }

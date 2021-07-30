@@ -4,8 +4,8 @@ public class Aeronave {
 	
 	protected String modelo;
 	
-	//construtor
-	public Aeronave()
+	//construtor recebe o modelo
+	public Aeronave(String modelo)
 	{
 		this.setModelo(modelo);
 	}

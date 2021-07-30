@@ -8,7 +8,7 @@ public class Passageiro {
 	private String cpf;
 	
 	//recebe os atributos no construtor e os inicializa
-	public Passageiro(String nome, String cpf) {
+	public Passageiro(String nome, String cpf) throws Exception {
 		this.setNome(nome);
 		this.setCpf(cpf);
 	}
@@ -21,12 +21,14 @@ public class Passageiro {
 	public String getCpf(){
 		return this.cpf;
 	}
-	
-	public void setCpf(String cpf){
+	//usa a classe exception aqui, mas posso usar uma classe extendendo a classe exception
+	//mas o método lança o erro...
+	public void setCpf(String cpf) throws Exception{
 		if(this.validaCpf(cpf)) {
 		this.cpf = cpf;
-		}else {
-			
+		}
+		else {
+			throw new Exception("Cpf Inexistente");
 		}
 	}
 	
@@ -90,7 +92,7 @@ public class Passageiro {
 	            	return false;
 	            }
 	         } catch (InputMismatchException erro) {
-	                return(false);
+	                return false;
 	            }
 	   }
 }
