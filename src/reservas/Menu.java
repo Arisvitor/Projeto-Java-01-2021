@@ -227,16 +227,121 @@ import javax.swing.JTextField;
 			rsva.add(rsva1);
 			rsva1.addActionListener(new ActionListener(){
 		       public void actionPerformed(java.awt.event.ActionEvent evt){
-		    	   //setVisible(false);
-		       }
+		    	   hideAllPanels();
+		    	   //criando o componente panel a partir da panelAeronave
+		    	   panelReserva = new JPanel();
+		    	   //panel.setBackground(Color.pink); //setar uma cor decente no final O/
+		    	   
+		    	   //iniciando o label selecione avião
+		    	   JLabel labelEscolhaAviao = new JLabel();
+		    	   labelEscolhaAviao.setText("Escolha o avião"); 
+		    	   
+		    	   JComboBox<Aviao> comboEscolhaAviao = new JComboBox<Aviao>(aeronaves);
+		    	   
+		    	   //label da Fileira
+		    	   JLabel labelEscolhaFileira = new JLabel();
+		    	   labelEscolhaFileira.setText("Escolha a fileira");
+		    	   
+		    	   JTextField textFieldEscolhaFileira = new JTextField("", 10);
+		    	   
+		    	   //label do Assento
+		    	   JLabel labelEscolhaAssento = new JLabel();
+		    	   labelEscolhaAssento.setText("Escolha o assento");
+		    	   
+		    	   JTextField textFieldEscolhaAssento = new JTextField("", 10);
+
+			    	 //label do Assento
+			    	   JLabel labelNomePassageiro = new JLabel();
+			    	   labelNomePassageiro.setText("Digite o nome do Passageiro: ");
+		    	   
+		    	   JTextField textFieldNomePassageiro = new JTextField("", 10);
+		    	   
+		    	 //label do Assento
+		    	   JLabel labelCpfPassageiro = new JLabel();
+		    	   labelCpfPassageiro.setText("Digite o Cpf do Passageiro");
+	    	   
+	    	   JTextField textFieldCpfPassageiro = new JTextField("", 11);
+		    	   
+		    	   
+		    	   JButton button = new JButton();
+		    	   button.setText("Reservar");
+		    	   button.addActionListener(new ActionListener(){
+				       public void actionPerformed(java.awt.event.ActionEvent evt){
+				    	   try {
+			    			   int fileira = Integer.parseInt(textFieldEscolhaFileira.getText());
+			    			   int assento = Integer.parseInt(textFieldEscolhaAssento.getText());
+					    	   //aeronave recebe um parâmetro modelo, que é exatamente o que capturamos no textfield
+			    			   
+			    			   Aviao aviao = (Aviao) comboEscolhaAviao.getSelectedItem();
+			    			   Passageiro passageiro = new Passageiro(textFieldNomePassageiro.getText(), textFieldCpfPassageiro.getText());
+			    			   aviao.setPassageiro(fileira, assento, passageiro);
+			    			   
+					    	   JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso !!!");
+				    	   } catch(Exception e) {
+					    	   JOptionPane.showMessageDialog(null, "Valor Inválido");
+				    	   }  
+				       } 
+				   });
+		    	   
+		    	   menu.add(panelReserva); 
+		    	   panelReserva.add(labelEscolhaAviao);
+		    	   panelReserva.add(comboEscolhaAviao);
+		    	   panelReserva.add(labelEscolhaFileira);
+		    	   panelReserva.add(textFieldEscolhaFileira);
+		    	   panelReserva.add(labelEscolhaAssento);
+		    	   panelReserva.add(textFieldEscolhaAssento);
+		    	   panelReserva.add(labelNomePassageiro);
+		    	   panelReserva.add(textFieldNomePassageiro);
+		    	   panelReserva.add(labelCpfPassageiro);
+		    	   panelReserva.add(textFieldCpfPassageiro);
+		    	   panelReserva.add(button);
+		    	   setVisible(true);
+		       }  
 			});
 			
 			//Consultar lugares vazios
 			rsva.add(rsva2);
 			rsva2.addActionListener(new ActionListener(){
 		       public void actionPerformed(java.awt.event.ActionEvent evt){
-		    	   //setVisible(false);
+		    	   hideAllPanels();
+		    	   //criando o componente panel a partir da panelAeronave
+		    	   panelReserva = new JPanel();
+		    	   //panel.setBackground(Color.pink); //setar uma cor decente no final O/
+		    	  
+		    	   //selecione um avião
+		    	   JLabel labelSelecioneAviao = new JLabel();
+		    	   labelSelecioneAviao.setText("Escolha o avião"); 
+		    	   
+		    	   JComboBox<Aviao> comboSelecioneAviao = new JComboBox<Aviao>(aeronaves);		    	   
+		    	   
+		    	   JButton button = new JButton();
+		    	   button.setText("Cadastrar");
+		    	   button.addActionListener(new ActionListener(){
+		    		   public void actionPerformed(java.awt.event.ActionEvent evt){
+				    	   try {
+			    			   Aviao aviao = (Aviao) comboSelecioneAviao.getSelectedItem();
+			    			   String message = "Os lugares disponíveis são: ";
+			    			   for(int x = 0; x < aviao.lugares.length; x++) {
+			    				   for(int y = 0; y < aviao.lugares[x].length; y++) {
+			    					   System.out.println(x + " " + y);
+			    					   if(!aviao.verificarLugarOcupado(x, y)) {
+			    						   message += " (" + x + "," + y + "),";
+			    					   }
+			    				   }
+			    			   }
+			    			   JOptionPane.showMessageDialog(null, message);
+				    	   } catch(Exception e) {
+					    	   JOptionPane.showMessageDialog(null, "Valor Inválido");
+				    	   }  
+				       }
+		    	   });
+		    		   menu.add(panelReserva); 
+			    	   panelReserva.add(labelSelecioneAviao);
+			    	   panelReserva.add(comboSelecioneAviao);
+			    	   panelReserva.add(button);
+			    	   setVisible(true);
 		       }
+		    	 
 			});
 			
 			//Consultar reservas realizadas
