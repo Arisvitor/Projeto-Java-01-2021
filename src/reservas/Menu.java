@@ -348,7 +348,21 @@ import javax.swing.JTextField;
 			rsva.add(rsva3);
 			rsva3.addActionListener(new ActionListener(){
 				public void actionPerformed(java.awt.event.ActionEvent evt){
-					//setVisible(false);
+					hideAllPanels();
+			    	   //criando o componente panel a partir da panelAeronave
+			    	   panelReserva = new JPanel();
+			    	   //panel.setBackground(Color.pink); //setar uma cor decente no final O/
+			    	  
+			    	   //selecione um avião
+			    	   JLabel labelSelecioneAviao = new JLabel();
+			    	   labelSelecioneAviao.setText("Escolha o avião"); 
+			    	   
+			    	   JComboBox<Aviao> comboSelecioneAviao = new JComboBox<Aviao>(aeronaves);		    	   
+			    	   
+			    	   JButton button = new JButton();
+			    	   button.setText("Cadastrar");
+			    	   button.addActionListener(new ActionListener(){
+			    		   public void actionPerformed(java.awt.event.ActionEvent evt){
 				}
 			});
 			
