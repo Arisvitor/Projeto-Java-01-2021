@@ -3,6 +3,7 @@ package reservas;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 	public class Menu extends JFrame {
 		//poderá armazenar 10 aeronaves nesse array: 10 voos
@@ -150,13 +153,34 @@ import javax.swing.JTextField;
 		    	   JLabel labelData = new JLabel();
 		    	   labelData.setText("Informe a data do vôo: "); 
 		    	   
-		    	   JTextField textFieldData = new JTextField("", 10);
+		    	   //***JTextField textFieldData = new JTextField("", 10);
+		    	   MaskFormatter mascaraData = null;
+		    	   try{
+			    	   mascaraData = new MaskFormatter("##/##/####");
+			    	   mascaraData.setPlaceholderCharacter('_');
+		    	   	  }
+		    	   catch(ParseException excp) {
+	                    System.err.println("A data informada é inválida: " + excp.getMessage());
+	                    System.exit(-1);
+		    	   		}
+		    	  JFormattedTextField jFormattedTextData = new JFormattedTextField(mascaraData);
+		    	   
 		    	   
 		    	 //iniciando o label hora
 		    	   JLabel labelHora = new JLabel();
 		    	   labelHora.setText("Informe o horário do voo"); 
 		    	   
-		    	   JTextField textFieldHora = new JTextField("", 10);
+		    	   //**JTextField textFieldHora = new JTextField("", 10);
+		    	   MaskFormatter mascaraHora = null;
+		    	   try{
+			    	   mascaraHora = new MaskFormatter("##:##");
+			    	   mascaraHora.setPlaceholderCharacter('_');
+		    	   	  }
+		    	   catch(ParseException excp) {
+	                    System.err.println("O horário informado é inválido: " + excp.getMessage());
+	                    System.exit(-1);
+		    	   		}
+		    	  JFormattedTextField jFormattedTextHora = new JFormattedTextField(mascaraHora);
 		    	   
 		    	   //selecione um avião
 		    	   JLabel labelSelecioneAviao = new JLabel();
@@ -172,14 +196,14 @@ import javax.swing.JTextField;
 					    	   if(menu.voosCounts < menu.voos.length) {
 					    		   int numero = Integer.parseInt(textFieldNroVoo.getText());
 						    	   //aeronave recebe um parâmetro modelo, que é exatamente o que capturamos no textfield
-						    	   Voo voo = new Voo((Aviao) comboSelecioneAviao.getSelectedItem(), numero, textFieldData.getText(), textFieldHora.getText());
+						    	   Voo voo = new Voo((Aviao) comboSelecioneAviao.getSelectedItem(), numero, jFormattedTextData.getText(), jFormattedTextHora.getText());
 						    	   
 						    	   menu.voos[menu.voosCounts] = voo;
 						    	   menu.voosCounts++;
 						    	   JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso !!!");
 						    	   textFieldNroVoo.setText("");
-						    	   textFieldData.setText("");
-						    	   textFieldHora.setText("");
+						    	   jFormattedTextData.setText("");
+						    	   jFormattedTextHora.setText("");
 					    	   } else {
 					    		   JOptionPane.showMessageDialog(null, "Limite de voos cadastrados excedido !!");
 					    	   }
@@ -195,10 +219,10 @@ import javax.swing.JTextField;
 		    	   panelVoo.add(textFieldNroVoo);
 		    	   
 		    	   panelVoo.add(labelData);
-		    	   panelVoo.add(textFieldData);
+		    	   panelVoo.add(jFormattedTextData);
 		    	   
 		    	   panelVoo.add(labelHora);
-		    	   panelVoo.add(textFieldHora);
+		    	   panelVoo.add(jFormattedTextHora);
 		    	   
 		    	   panelVoo.add(labelSelecioneAviao);
 		    	   panelVoo.add(comboSelecioneAviao);
