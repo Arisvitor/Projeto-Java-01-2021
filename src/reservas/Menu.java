@@ -344,13 +344,11 @@ import javax.swing.text.MaskFormatter;
 		    		   public void actionPerformed(java.awt.event.ActionEvent evt){
 				    	   try {
 			    			   Aviao aviao = (Aviao) comboSelecioneAviao.getSelectedItem();
-			    			   String message = "Os lugares disponíveis são: ";
+			    			   String message = "Os lugares disponíveis são: \n";
 			    			   for(int x = 0; x < aviao.lugares.length; x++) {
+    				   			   message += '\n';
 			    				   for(int y = 0; y < aviao.lugares[x].length; y++) {
-			    					   System.out.println(x + " " + y);
-			    					   if(!aviao.verificarLugarOcupado(x, y)) {
-			    						   message += " (" + x + "," + y + "),";
-			    					   }
+		    						   message += aviao.verificarLugarOcupado(x, y) ? "X " : "0 ";
 			    				   }
 			    			   }
 			    			   JOptionPane.showMessageDialog(null, message);
@@ -371,8 +369,8 @@ import javax.swing.text.MaskFormatter;
 			//Consultar reservas realizadas
 			rsva.add(rsva3);
 			rsva3.addActionListener(new ActionListener(){
-				public void actionPerformed(java.awt.event.ActionEvent evt){
-					hideAllPanels();
+			       public void actionPerformed(java.awt.event.ActionEvent evt){
+			    	   hideAllPanels();
 			    	   //criando o componente panel a partir da panelAeronave
 			    	   panelReserva = new JPanel();
 			    	   //panel.setBackground(Color.pink); //setar uma cor decente no final O/
@@ -387,6 +385,32 @@ import javax.swing.text.MaskFormatter;
 			    	   button.setText("Cadastrar");
 			    	   button.addActionListener(new ActionListener(){
 			    		   public void actionPerformed(java.awt.event.ActionEvent evt){
+					    	   try {
+				    			   Aviao aviao = (Aviao) comboSelecioneAviao.getSelectedItem();
+				    			   String message = "As reservas feitas são: \n";
+				    			   for(int x = 0; x < aviao.lugares.length; x++) {
+				    				   for(int y = 0; y < aviao.lugares[x].length; y++) {
+				    					   if(aviao.verificarLugarOcupado(x, y)) {
+				    						   Passageiro passageiro = aviao.getPassageiro(x, y);
+				    						   message += "[" + x + ", " + y + "] - " + passageiro.getNome() + " - " + passageiro.getCpf() + "\n";
+				    					   }
+				    				   }
+				    			   }
+				    			   JOptionPane.showMessageDialog(null, message);
+					    	   } catch(Exception e) {
+						    	   JOptionPane.showMessageDialog(null, "Valor Inválido");
+					    	   }  
+					       }
+			    	   });
+			    		   menu.add(panelReserva); 
+				    	   panelReserva.add(labelSelecioneAviao);
+				    	   panelReserva.add(comboSelecioneAviao);
+				    	   panelReserva.add(button);
+				    	   setVisible(true);
+			       }
+			    	 
+				});rsva3.addActionListener(new ActionListener(){
+				public void actionPerformed(java.awt.event.ActionEvent evt){
 				}
 			});
 			
