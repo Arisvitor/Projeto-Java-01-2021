@@ -157,7 +157,7 @@ import javax.swing.text.MaskFormatter;
 		    	   MaskFormatter mascaraData = null;
 		    	   try{
 			    	   mascaraData = new MaskFormatter("##/##/####");
-			    	   mascaraData.setPlaceholderCharacter('_');
+			    	   mascaraData.setPlaceholderCharacter('_');			    	   
 		    	   	  }
 		    	   catch(ParseException excp) {
 	                    System.err.println("A data informada é inválida: " + excp.getMessage());
@@ -299,8 +299,11 @@ import javax.swing.text.MaskFormatter;
 			    			   Aviao aviao = (Aviao) comboEscolhaAviao.getSelectedItem();
 			    			   Passageiro passageiro = new Passageiro(textFieldNomePassageiro.getText(), textFieldCpfPassageiro.getText());
 			    			   aviao.setPassageiro(fileira, assento, passageiro);
-			    			   
-					    	   JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso !!!");
+			    			   JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso !!!");
+			    			   textFieldCpfPassageiro.setText("");
+			    			   textFieldNomePassageiro.setText("");
+			    			   textFieldEscolhaAssento.setText("");
+			    			   textFieldEscolhaFileira.setText("");
 				    	   } catch(Exception e) {
 					    	   JOptionPane.showMessageDialog(null, "Valor Inválido");
 				    	   }  
@@ -339,7 +342,7 @@ import javax.swing.text.MaskFormatter;
 		    	   JComboBox<Aviao> comboSelecioneAviao = new JComboBox<Aviao>(aeronaves);		    	   
 		    	   
 		    	   JButton button = new JButton();
-		    	   button.setText("Cadastrar");
+		    	   button.setText("Consultar");
 		    	   button.addActionListener(new ActionListener(){
 		    		   public void actionPerformed(java.awt.event.ActionEvent evt){
 				    	   try {
@@ -382,7 +385,7 @@ import javax.swing.text.MaskFormatter;
 			    	   JComboBox<Aviao> comboSelecioneAviao = new JComboBox<Aviao>(aeronaves);		    	   
 			    	   
 			    	   JButton button = new JButton();
-			    	   button.setText("Cadastrar");
+			    	   button.setText("Consultar");
 			    	   button.addActionListener(new ActionListener(){
 			    		   public void actionPerformed(java.awt.event.ActionEvent evt){
 					    	   try {
